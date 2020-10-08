@@ -55,12 +55,12 @@ app.delete('/api/persons/:id', (req, res) => {
   })
 
 
-  const generateId = () => {
+  /*const generateId = () => {
     const maxId = persons.length > 0
       ? Math.max(...persons.map(n => n.id))
       : 0
     return maxId + 1
-  }
+  }*/
   
   app.post('/api/persons', (req, res) => {
     const body = req.body
@@ -68,7 +68,7 @@ app.delete('/api/persons/:id', (req, res) => {
     
   
     const person = {
-      id: generateId(),
+      id: Math.floor(Math.random() * 30),
       name: body.name,
       number: body.number,
     }
