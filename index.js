@@ -55,9 +55,14 @@ app.get('/api/persons', (req, res) => {
 })
 
 app.get('/info', (req, res) => {
-    const info = `Phonebook has info for ${persons.length} people`
+    /*const info = `Phonebook has info for ${persons.length} people`
     const date = Date()
-    res.send(`<p>${info}</p><p>${date}</p>`)
+    res.send(`<p>${info}</p><p>${date}</p>`)*/
+    Person.find({}).then(people => {
+      const info = `There is information of ${people.length} people in the phonebook.`
+      const time = Date()
+      res.send(`<p>${info}</p><p>${time}</p>`)
+    })
 })
 
 app.get('/api/persons/:id', (req, res, next) => {
@@ -132,6 +137,12 @@ app.put('/api/persons/:id', (req, res, next) => {
   }
   
   app.use(errorHandler)
+
+  const unknownEndpoint = (req, res) => {
+    res.status(404).send({ error: 'unknown endpoint' })
+  }
+  
+  app.use(unknownEndpoint)
 
 
 const PORT = process.env.PORT
