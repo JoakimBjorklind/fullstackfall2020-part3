@@ -15,10 +15,14 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 
 const personSchema = new mongoose.Schema({
   name: {
+    unique: true,
+    minlength: 3
+}, 
+  
+  number: {
     type: String,
-    unique: true  
-  },
-  number: String,
+    minlength: 8
+},
 })
 
 personSchema.plugin(uniqueValidator)
