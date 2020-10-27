@@ -14,14 +14,14 @@ app.use(express.static('build'))
 
 
 
-morgan.token('body', (req) => {
+morgan.token('data', (req) => {
   if (req.method === 'POST') {
     return JSON.stringify(req.body)
   } else {
     return null
   }
 })
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
 
 /*let persons = [
     {
