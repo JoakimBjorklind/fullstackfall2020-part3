@@ -15,28 +15,28 @@ const url =
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const personSchema = new mongoose.Schema({
-    name: String,
-    number: String
+  name: String,
+  number: String
 })
 
 const Person = mongoose.model('Person', personSchema)
 
 if (name === undefined || number === undefined) {
-    Person
-        .find({})
-        .then(persons => {
-            console.log("Phonebook:")
-            persons.map(person => console.log(person.name, person.number))
-            mongoose.connection.close()
-        })
-} else {
-    const person = new Person({
-        name: name,
-        number: number
+  Person
+    .find({})
+    .then(persons => {
+      console.log('Phonebook: ')
+      persons.map(person => console.log(person.name, person.number))
+      mongoose.connection.close()
     })
+} else {
+  const person = new Person({
+    name: name,
+    number: number
+  })
 
-person.save().then(result => {
-  console.log(`the name ${name} and number ${number} was added to the phonebook`)
-  mongoose.connection.close()
-})
+  person.save().then(() => {
+    console.log(`the name ${name} and number ${number} was added to the phonebook`)
+    mongoose.connection.close()
+  })
 }
